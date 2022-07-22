@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,22 +14,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/contacto', function () {
-    return view('contacto');
+Route::get('/', function () {
+    return view('welcome');
 });
 
 
 
-Route::get('/products', 'ProductController@index')->name('paginas.index');
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 
-Route::get('/products/create', 'ProductController@create')->name('paginas.create');
+Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
 
-Route::post('/products', 'ProductController@store')->name('paginas.store');
+Route::post('/products', [ProductController::class, 'store'])->name('products.store');
 
-Route::get('/products/{id}', 'ProductController@show')->name('paginas.show');
+Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
 
-Route::get('/products/{id}/edit', 'ProductController@edit')->name('paginas.edit');
+Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
 
-Route::put('/products/{id}', 'ProductController@update')->name('paginas.update');
+Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
 
-Route::delete('/products/{id}', 'ProductController@destroy')->name('paginas.destroy');
+Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+
+// Route::resource('products', ProductController::class);
